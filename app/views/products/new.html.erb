@@ -17,6 +17,23 @@
 <div id="productResult">
   <h2 id="productName"></h2>
   <p id="productPrice"></p>
-  <p id="productDescription"></p>  
-  <p id="productInventory"></p>  
-</div> 
+  <p id="productDescription"></p>
+  <p id="productInventory"></p>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    $('form').submit(function(e) {
+      e.preventDefault();
+      var values = $(this).serialize();
+      var posting = $.post('/post', values);
+
+      posting.done(function(data) {
+        $('#productName').text(data["name"]);
+        $('#productPrice').text(data["price"]);
+        $('#productDescription').text(data["description"]);
+        $('#productInventory').text(data["inventory"]);
+      });
+    });
+  });
+</script>
